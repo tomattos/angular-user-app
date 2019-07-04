@@ -1,0 +1,27 @@
+<form class="sign-in-form">
+  <h3>Sign In</h3>
+
+  <mat-form-field>
+    <input
+      matInput
+      matNativeControl
+      name="email"
+      placeholder="Email"
+      [formControl]="formControlEmail"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      matNativeControl
+      name="password"
+      placeholder="Password"
+      [formControl]="formControlPassword"
+    />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary">Login</button>
+
+  <a href="" class="sign-in-form--link">Sign up</a>
+</form>
