@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from "@angular/core";
 
 @Directive({
-  selector: "[appLoginForm]"
+  selector: "[login-form-host]"
 })
 export class LoginFormDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
