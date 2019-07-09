@@ -1,29 +1,29 @@
-<form class="sign-in-form">
+<form class="sign-in-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form.value)">
   <h3>Sign In</h3>
 
   <mat-form-field>
-    <input
-      matInput
+    <input matInput
       matNativeControl
       name="email"
       placeholder="Email"
-      [formControl]="formControlEmail"
-    />
+      formControlName="email" />
   </mat-form-field>
 
   <mat-form-field>
-    <input
-      matInput
+    <input matInput
       matNativeControl
       name="password"
       placeholder="Password"
-      [formControl]="formControlPassword"
-    />
+      formControlName="password" />
   </mat-form-field>
 
-  <button mat-raised-button color="primary">Login</button>
+  <button mat-raised-button
+    color="primary">Login</button>
 
-  <button class="sign-in-form--link" (click)="changeFormHandler()">
+  <a class="sign-in-form--link"
+    (click)="onChangeForm()">
     Sign up
-  </button>
+  </a>
 </form>

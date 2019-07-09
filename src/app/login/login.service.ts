@@ -1,20 +1,18 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-import { SignInFormComponent } from "src/app/login/sign-in-form/sign-in-form.component";
+import { Injectable, Type } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class LoginService {
-  constructor() {}
+  constructor() { }
   subject = new Subject<any>();
 
-  changeLoginFom(component) {
-    this.subject.next(component);
+  changeLoginFom(type: string) {
+    this.subject.next(type);
   }
 
   getFormName() {
-    this.subject.next(SignInFormComponent);
     return this.subject;
   }
 }

@@ -1,15 +1,33 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+import { LoginService } from '../login.service';
+import { LoginForm } from '../login-form';
 
 @Component({
-  selector: "app-sign-up-form",
-  templateUrl: "./sign-up-form.component.html",
-  styleUrls: ["./sign-up-form.component.scss"]
+  selector: 'app-sign-up-form',
+  templateUrl: './sign-up-form.component.html',
+  styleUrls: ['./sign-up-form.component.scss']
 })
-export class SignUpFormComponent implements OnInit {
-  email = "";
-  password = "";
+export class SignUpFormComponent implements LoginForm {
+  form: FormGroup;
+  redirectFormType = 'sign-in';
 
-  constructor() {}
+  constructor(private loginService: LoginService, private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      email: '',
+      password: ''
+    });
+  }
 
-  ngOnInit() {}
+  onChangeForm() {
+    this.loginService.changeLoginFom(this.redirectFormType);
+  }
+
+  onSubmit() {
+    // TODO: add http method to submit login form;
+    console.log('submit');
+
+    this.form.reset();
+  }
 }
