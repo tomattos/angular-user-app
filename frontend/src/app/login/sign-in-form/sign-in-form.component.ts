@@ -1,18 +1,18 @@
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { LoginService } from "../service/login.service";
-import { LoginForm } from "../interface/login-form";
-import { Router } from "@angular/router";
+import { LoginService } from '../service/login.service';
+import { LoginForm } from '../interface/login-form';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-sign-in-form",
-  templateUrl: "./sign-in-form.component.html",
-  styleUrls: ["../commonStyles/sign-form.scss"]
+  selector: 'app-sign-in-form',
+  templateUrl: './sign-in-form.component.html',
+  styleUrls: ['../commonStyles/sign-form.scss']
 })
 export class SignInFormComponent implements LoginForm {
   form: FormGroup;
-  redirectFormType = "sign-up";
+  redirectFormType = 'sign-up';
 
   constructor(
     private loginService: LoginService,
@@ -20,8 +20,8 @@ export class SignInFormComponent implements LoginForm {
     private router: Router
   ) {
     this.form = this.formBuilder.group({
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     });
   }
 
@@ -32,7 +32,7 @@ export class SignInFormComponent implements LoginForm {
   onSubmit() {
     //  TODO: add additional logic related to backend;
     this.loginService.login();
-    this.router.navigate(["/users"]);
+    this.router.navigate(['/users']);
 
     this.form.reset();
   }
