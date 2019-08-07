@@ -13,7 +13,7 @@ export class UsersService {
 
   findAll(): Promise<UserEntity[]> {
     return this.userRepository.createQueryBuilder()
-      .select(['user.email', 'user.firstName', 'user.lastName'])
+      .select(['user.email', 'user.firstName', 'user.lastName', 'user.id'])
       .from(UserEntity, 'user')
       .getMany();
   }
