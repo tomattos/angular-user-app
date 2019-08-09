@@ -14,9 +14,9 @@ export class UserEntity {
   lastName: string;
 
   @Column({
-    unique: true,
-  })
-  private email: string;
+      unique: true,
+    })
+  email: string;
 
   @Column({
     nullable: true,
