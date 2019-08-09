@@ -1,0 +1,14 @@
+.users {
+  &--header {
+    display: flex;
+    align-items: center;
+  }
+
+  &--create-btn {
+    margin-left: 20px;
+  }
+
+  &--td-menu {
+    text-align: right;
+  }
+}

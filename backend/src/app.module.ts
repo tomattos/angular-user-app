@@ -5,9 +5,30 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
+import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
+import { VerificationTokenEntity } from './entities/verification-token.entity';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), UsersModule, AuthModule],
+  imports: [
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'tomattos6@gmail.com',
+          pass: 'tomattos4042483A'
+        }
+      },
+      template: {
+        dir: `${__dirname}/templates`,
+        adapter: new HandlebarsAdapter()
+      }
+    }),
+    TypeOrmModule.forRoot(),
+    UsersModule,
+    AuthModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

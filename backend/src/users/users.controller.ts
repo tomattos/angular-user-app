@@ -1,25 +1,35 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User } from './user.interface';
 import { CreateUserDto } from './dtos/create-user.dto';
-import * as crypto from 'crypto';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { UserEntity } from '../entities/user.entity';
+import { UmaMailService } from '../utils/services/uma-mail/uma-mail.service';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly userService: UsersService,
+    private readonly umaMailService: UmaMailService
   ) { }
 
   @Get()
-  async findAll(): Promise<User[]> {
-    return this.userService.findAll();
+  findAll(
+    @Query('page') page: number = 0,
+    @Query('rowsPerPage') limit: number = 10,
+  ): Promise<Pagination<UserEntity>> {
+    limit = limit > 100 ? 100 : limit;
+
+    return this.userService.findAll({ page, limit });
   }
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    const { password, ...data } = createUserDto;
-    const hashPassword = crypto.createHmac('sha256', password).digest('hex');
+    await this.userService.create(createUserDto);
+    await this.umaMailService.sendConfirmationRegistrationMail(createUserDto.email);
+  }
 
-    this.userService.create({ ...data, hashPassword });
+  @Delete()
+  async remove(@Query('id') id: number) {
+    await this.userService.remove(id);
   }
 }

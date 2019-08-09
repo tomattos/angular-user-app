@@ -1,0 +1,41 @@
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()">
+  <h3>Create user</h3>
+
+  <mat-form-field>
+    <input
+      matInput
+      matNativeControl
+      name="email"
+      placeholder="Email"
+      formControlName="email"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      matNativeControl
+      name="firstName"
+      placeholder="First Name"
+      formControlName="firstName"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      matNativeControl
+      name="lastName"
+      placeholder="Last Name"
+      formControlName="lastName"
+    />
+  </mat-form-field>
+
+  <div class="form--buttons">
+    <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Create</button>
+  </div>
+</form>
